@@ -1,5 +1,23 @@
-export default class App {
+import BaseComponent from './src/js/components/BaseComponent.js';
+
+export default class App extends BaseComponent {
   constructor($target) {
-    console.log($target);
+    super($target, 'main', {
+      class: 'app',
+      styles: {
+        backgroundColor: 'orange',
+      },
+    });
+    this.bindEvent();
+    this.HTML(`<div id='sub'></div>`);
+    this.addHTML(`sub`);
   }
+
+  onClick = () => {
+    console.log('onClick');
+  };
+  // prototype에 선언됨
+  // onHover() {
+  //   console.log(this);
+  // }
 }
