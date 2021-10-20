@@ -16,8 +16,4 @@ export default class App extends BaseComponent {
   onClick = () => {
     console.log('onClick');
   };
-  // prototype에 선언됨
-  // onHover() {
-  //   console.log(this);
-  // }
 }
