@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default class BaseComponent {
   constructor($target, tag, attributes) {
     this.$parent = $target;
@@ -19,7 +20,6 @@ export default class BaseComponent {
   }
 
   bindEvent() {
-    console.log(this);
     Object.entries(this).forEach(([fieldName, fieldValue]) => {
       if (fieldName.indexOf('on') !== 0) return;
       const eventType = fieldName.slice(2).toLowerCase();

@@ -13,6 +13,13 @@ h1 {
 }
 
 body {
+  --black: #111;
+  --white: #fff;
+  --primary: #1976d2;
+  --error: #f44336;
+  --warning: #ff9800;
+  --success: #4caf50;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,4 +88,14 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+
+.ErrorMessage{
+  color : white;
+  font-weight : bold;
+  font-size: 18px;
+  box-shadow: 0 0 3px #aaa;
+  background-color: var(--warning);
+  transition: opacity 0.3s;
 }
