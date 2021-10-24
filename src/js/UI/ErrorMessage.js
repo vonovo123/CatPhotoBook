@@ -16,5 +16,9 @@ export default class ErrorMessage extends BaseComponent {
         transform: 'translate(-50%, -50%)',
       },
     });
+
+    setTimeout(() => {
+      this.$.remove();
+    }, DURATION);
   }
 }
