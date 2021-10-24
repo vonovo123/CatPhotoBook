@@ -8,8 +8,5 @@ export default class Loading extends BaseComponent {
                  <img src="../../src/assets/nyan-cat.gif">
                 </div>`,
     });
-    setTimeout(() => {
-      this.$.remove();
-    }, 2000);
   }
 }
