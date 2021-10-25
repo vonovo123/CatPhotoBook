@@ -16,6 +16,7 @@ export default class BreadCrum extends Component {
 
   render = () => {
     const data = this.get('history', 'local');
+    console.log(data);
     this.HTML(data.map(this.createBreadCrum).join(''));
   };
 }
