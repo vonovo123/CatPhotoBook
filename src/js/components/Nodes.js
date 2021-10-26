@@ -1,6 +1,5 @@
 import Component from './Component.js';
 import api from '../../API/api.js';
-import ImageViewer from './ImageViewer.js';
 
 export default class Nodes extends Component {
   constructor($target) {
@@ -9,7 +8,9 @@ export default class Nodes extends Component {
     });
     // localStorage 에 값이 null이면 []로 초기화
     const initialData = this.get('nodes', 'web') || [];
+    const curDir = this.get('curDir', 'web') || '';
     this.set(initialData, 'nodes', ['local', 'web']);
+    this.set(curDir, 'curDir', ['local', 'web']);
     this.subscribe('nodes');
     if (initialData.length === 0) {
       this.setData({ id: '', name: 'root', type: 'DIRECTORY' });
@@ -19,11 +20,15 @@ export default class Nodes extends Component {
 
   render() {
     const data = this.get('nodes', 'local');
-    this.HTML(data.map(this.createNodeElement).join(''));
+    const curDir = this.get('curDir', 'local');
+    const prevBtn = `<div class="Node" data-node-id='prev' data-node-type='DIRECTORY'><img src="../../src/assets/prev.png"></div>`;
+    const dataTemplate = data.map(this.createNodeElement).join('');
+    this.HTML(
+      curDir && curDir !== 'root' ? prevBtn + dataTemplate : dataTemplate
+    );
   }
 
   createNodeElement = node => {
-    console.log(node);
     const imgPath =
       node.type === 'FILE'
         ? '../../src/assets/file.png'
@@ -49,13 +54,20 @@ export default class Nodes extends Component {
 
   async setData(node) {
     if (node.type === 'DIRECTORY') {
-      const result = await this.tryFetchData(api.getDir, node.id, {
+      const breadCrum = this.get('history', 'local');
+      let result = '';
+      if (node.id === 'prev') {
+        breadCrum.pop();
+        node = breadCrum.pop();
+        console.log(node);
+      }
+      result = await this.tryFetchData(api.getDir, node.id, {
         cb: data => data,
       });
-      const breadCrum = this.get('history', 'local');
-      this.set(result, 'nodes', ['local', 'web']);
       breadCrum.push(node);
       this.set(breadCrum, 'history', ['local', 'web']);
+      this.set(node.name, 'curDir', ['local', 'web']);
+      this.set(result, 'nodes', ['local', 'web']);
     } else {
       this.set(node.filePath, 'imageViewer', ['local', 'web']);
     }
