@@ -8,18 +8,27 @@ export default class ImageViewer extends Component {
     super($target, 'div', {
       className: 'Modal ImageViewer',
     });
-    const initialData = this.get('imageViewer', 'web') || [];
+    const initialData = this.get('imageViewer', 'web') || '';
     this.set(initialData, 'imageViewer', ['local', 'web']);
     this.subscribe('imageViewer');
+    this.bindEvent();
   }
+
+  onClick = () => {
+    this.set([], 'imageViewer', ['local', 'web']);
+  };
 
   render() {
     const data = this.get('imageViewer', 'local');
-    console.log((document.querySelector('.Modal').style.display = 'block'));
-    this.HTML(
-      `<div class="content">${
-        data ? `<img src="${imagePrefix}${data}">` : ''
-      }</div>`
-    );
+    if (data.length !== 0) {
+      document.querySelector('.Modal').style.display = 'block';
+      this.HTML(
+        `<div class="content">${
+          data ? `<img src="${imagePrefix}${data}">` : ''
+        }</div>`
+      );
+    } else {
+      document.querySelector('.Modal').style.display = 'none';
+    }
   }
 }
