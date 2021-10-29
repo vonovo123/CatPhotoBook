@@ -21,6 +21,7 @@ export default class Nodes extends Component {
   render() {
     const data = this.get('nodes', 'local');
     const curDir = this.get('curDir', 'local');
+    console.log('nodes : curdir', curDir && curDir !== 'root');
     const prevBtn = `<div class="Node" data-node-id='prev' data-node-type='DIRECTORY'><img src="../../src/assets/prev.png"></div>`;
     const dataTemplate = data.map(this.createNodeElement).join('');
     this.HTML(
@@ -59,7 +60,6 @@ export default class Nodes extends Component {
       if (node.id === 'prev') {
         breadCrum.pop();
         node = breadCrum.pop();
-        console.log(node);
       }
       result = await this.tryFetchData(api.getDir, node.id, {
         cb: data => data,
