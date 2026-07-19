@@ -5,11 +5,13 @@
 
 프레임워크 없이 컴포넌트 · 상태(pub/sub) · 네비게이션 서비스를 직접 구성했습니다.
 
+**데모:** https://vonovo123.github.io/CatPhotoBook/
+
 ## 실행 방법
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
+npm run dev      # http://localhost:5173/CatPhotoBook/
 ```
 
 | 명령 | 설명 |
@@ -17,6 +19,17 @@ npm run dev      # http://localhost:5173
 | `npm run build` | 타입체크 후 프로덕션 빌드 (`dist/`) |
 | `npm run preview` | 빌드 결과 미리보기 |
 | `npm run typecheck` | TypeScript 검사만 실행 |
+
+## 배포 (GitHub Pages)
+
+`main` 푸시 시 Actions가 `dist`를 GitHub Pages에 배포합니다.
+
+최초 1회 저장소 설정이 필요합니다.
+
+1. **Settings → Pages → Build and deployment**
+2. Source: **GitHub Actions** 선택
+
+이후 워크플로가 성공하면 위 데모 URL에서 확인할 수 있습니다.
 
 ## 기술 스택
 
