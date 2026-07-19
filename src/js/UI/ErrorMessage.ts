@@ -1,13 +1,17 @@
-import BaseComponent from '../components/BaseComponent.js';
+import BaseComponent from '../components/BaseComponent';
+import { escapeHtml } from '../utils/escapeHtml';
 
 const DURATION = 2000;
+
 export default class ErrorMessage extends BaseComponent {
-  constructor(message, status) {
+  constructor(message: string, status?: number) {
+    const safeMessage = escapeHtml(message);
+    const statusHtml =
+      status !== undefined ? `<div>${escapeHtml(String(status))}</div>` : '';
+
     super(document.body, 'div', {
       className: 'ErrorMessage',
-      innerHTML: `${status ? `<div>${status}</div>` : ''}
-          <div>${message}</div>
-        `,
+      innerHTML: `${statusHtml}<div>${safeMessage}</div>`,
       styles: {
         position: 'fixed',
         zIndex: 1001,

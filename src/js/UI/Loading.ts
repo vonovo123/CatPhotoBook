@@ -1,12 +1,12 @@
-import BaseComponent from '../components/BaseComponent.js';
+import BaseComponent from '../components/BaseComponent';
+import nyanCat from '../../assets/nyan-cat.gif';
 
 export default class Loading extends BaseComponent {
   constructor() {
-    console.log('loading');
     super(document.body, 'div', {
       className: 'Loading Modal',
       innerHTML: `<div class="content">
-                 <img src="../../src/assets/nyan-cat.gif">
+                 <img src="${nyanCat}" alt="로딩 중">
                 </div>`,
     });
   }
